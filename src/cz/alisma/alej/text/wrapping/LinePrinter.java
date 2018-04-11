@@ -58,17 +58,19 @@ public class LinePrinter {
      * Prints all remaining words, aligning the lines properly.
      */
     public void flush() {
-        int lengthSoFar = 0;
+        int lengthSoFar = -1;
         List<String> line = new ArrayList<>();
         
         for (String word : words) {
-            if (lengthSoFar + word.length() > width) {
+            if (lengthSoFar + 1 + word.length() > width) {
                 output.println(aligner.format(line));
                 line.clear();
-                lengthSoFar = 0;
+                lengthSoFar = -1;
+            } else {
+                lengthSoFar++;
             }
             line.add(word);
-            lengthSoFar += word.length() + 1;
+            lengthSoFar += word.length();
         }
         
         if (!line.isEmpty()) {
