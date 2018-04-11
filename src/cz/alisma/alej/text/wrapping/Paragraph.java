@@ -30,6 +30,7 @@ import java.util.Scanner;
 /** Paragraph of text. */
 public class Paragraph {
     private Scanner words;
+    private String content;
 
     /** Constructs the paragraph from list of lines.
      * 
@@ -39,9 +40,10 @@ public class Paragraph {
         StringBuilder builder = new StringBuilder();
         for (String line : lines) {
             builder.append(line);
-            builder.append(" ");
+            builder.append("\n");
         }
-        words = new Scanner(builder.toString());
+        content = builder.toString();
+        words = new Scanner(content);
     }
 
     /** Tells whether there is another word not yet read in the paragraph. */
@@ -55,5 +57,13 @@ public class Paragraph {
      */
     public String nextWord() {
         return words.next();
+    }
+
+    /** Debugging only: get content as a string.
+     *
+     * @return Whole paragraph content.
+     */
+    public String getContent() {
+        return content;
     }
 }
