@@ -113,4 +113,9 @@ public class LinePrinterTest {
         printer.addWord("456789012");
         printer.flush();
 	}
+	
+	@Test
+	public void showFailure() {
+		assertTrue(false);
+	}
 }
