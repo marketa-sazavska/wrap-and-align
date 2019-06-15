@@ -24,19 +24,22 @@
 
 package cz.alisma.alej.text.wrapping;
 
+import cz.alisma.alej.text.wrapping.aligners.Aligner;
+import cz.alisma.alej.text.wrapping.aligners.LeftAligner;
+
 import java.util.Scanner;
 
 public class WrapAndAlign {
     private static final int MAX_WIDTH = 50;
 
-    public static void main(String[] args) {
+    public static void run(Aligner alignerToUse, int width) {
         Scanner input = new Scanner(System.in);
         ParagraphDetector pd = new ParagraphDetector(input);
-        Aligner aligner = new LeftAligner();
+
 
         while (pd.hasNextParagraph()) {
             Paragraph para = pd.nextParagraph();
-            LinePrinter line = new LinePrinter(System.out, MAX_WIDTH, aligner);
+            LinePrinter line = new LinePrinter(System.out, width, alignerToUse);
             while (para.hasNextWord()) {
                 String word = para.nextWord();
                 line.addWord(word);
@@ -44,5 +47,9 @@ public class WrapAndAlign {
             line.flush();
             System.out.println();
         }
+    }
+
+    public static void main(String[] args) {
+        run(new LeftAligner(), MAX_WIDTH);
     }
 }

@@ -24,6 +24,8 @@
 
 package cz.alisma.alej.text.wrapping;
 
+import cz.alisma.alej.text.wrapping.aligners.Aligner;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +65,7 @@ public class LinePrinter {
         
         for (String word : words) {
             if (lengthSoFar + 1 + word.length() > width) {
-                output.println(aligner.format(line));
+                output.println(aligner.format(line, width));
                 line.clear();
                 lengthSoFar = -1;
             } else {
@@ -74,7 +76,7 @@ public class LinePrinter {
         }
         
         if (!line.isEmpty()) {
-            output.println(aligner.format(line));
+            output.println(aligner.format(line, width));
         }
     }
 

@@ -23,6 +23,7 @@
  */
 package cz.alisma.alej.text.wrapping;
 
+import cz.alisma.alej.text.wrapping.aligners.Aligner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +36,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LinePrinterTest {
-	private static class TestingAligner implements Aligner {
+	private static class TestingAligner extends Aligner {
 	    private List<List<String>> expected = new LinkedList<>();
 	    
 	    public TestingAligner(String[][] lines) {
@@ -45,7 +46,7 @@ public class LinePrinterTest {
         }
 	    
         @Override
-        public String format(List<String> words) {
+        public String format(List<String> words, int width) {
             assertFalse(expected.isEmpty());
             List<String> exp = expected.remove(0);
             assertEquals(exp, words);
